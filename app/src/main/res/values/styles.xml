@@ -1,0 +1,19 @@
+<resources>
+
+    <style name="FilterButtonActive" parent="android:Widget.Button">
+        <item name="android:background">#7000</item>
+        <item name="android:textColor">#eee</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:minHeight">46dp</item>
+    </style>
+
+    <style name="OverlayDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>
