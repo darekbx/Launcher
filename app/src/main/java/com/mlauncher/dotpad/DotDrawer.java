@@ -23,7 +23,7 @@ public class DotDrawer {
         Paint paint = new Paint();
         Canvas canvas = new Canvas(bitmap);
 
-        canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.prism), 0, 0, paint);
+        canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.ring), 0, 0, paint);
         canvas.rotate(180, BITMAP_SIZE / 2, BITMAP_SIZE / 2);
 
         Collections.reverse(dots);

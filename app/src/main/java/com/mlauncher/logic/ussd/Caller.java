@@ -104,21 +104,26 @@ public class Caller {
 
     public void parseMessage(String message) {
         if (message != null) {
-            try {
-                if (Parser.isAccountBalance(message)) {
+            if (Parser.isAccountBalance(message)) {
+                try {
                     AccountBalance accountBalance = Parser.parseAccountBalance(message);
                     if (listener != null) {
                         listener.onAccountBalance(accountBalance);
                     }
-                } else {
+                } catch (Exception e) {
+                    Log.v("-------", "Unable to parse account message: " + message);
+                    e.printStackTrace();
+                }
+            } else {
+                try {
                     InternetBalance internetBalance = Parser.parseInternetBalance(message);
                     if (listener != null) {
                         listener.onInternetBalance(internetBalance);
                     }
+                } catch (Exception e) {
+                    Log.v("-------", "Unable to parse internet message: " + message);
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                Log.v("-------", "Unable to parse message: " + message);
-                e.printStackTrace();
             }
         }
         takeFirst();
