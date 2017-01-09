@@ -26,6 +26,7 @@ import rx.schedulers.Schedulers;
 public class GameRenderer implements Renderer {
 
     private static final int FPS_DELAY = 1;
+    private static boolean DISABLE_TILT = true;
 
     public interface Listener {
         void onFramesPerSecond(int framesPerSecond);
@@ -114,7 +115,10 @@ public class GameRenderer implements Renderer {
     }
 
     public void addXTilt(float tiltX) {
-        this.tiltX -= (tiltX * 1.01f);
+        if (DISABLE_TILT) {
+            return;
+        }
+        this.tiltX -= tiltX;
         this.tiltX = Math.max(this.tiltX, -70f);
         this.tiltX = Math.min(this.tiltX, -20f);
     }

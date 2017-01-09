@@ -19,8 +19,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class FrameSurface {
 
-    private static final int IMAGE_SIZE = 80;
-    private static final int FRAME_COUNT = 29;
+    private static final int IMAGE_SIZE = 64;
+    private static final int FRAME_COUNT = 71;
 
     private GridCreator gridCreator;
     private NativeBufferCreator bufferCreator;
@@ -70,7 +70,7 @@ public class FrameSurface {
         int framesCount = FRAME_COUNT;
         imagesData = new ArrayList<>(FRAME_COUNT);
         for (int i = 0; i <= framesCount; i++) {
-            int resourceId = resources.getIdentifier("frame_" + i, "drawable", context.getPackageName());
+            int resourceId = resources.getIdentifier("f" + i, "drawable", context.getPackageName());
             Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceId);
             int[] imageData = ImageUtils.extractFlat(bitmap);
             bitmap.recycle();
@@ -85,7 +85,7 @@ public class FrameSurface {
         vertexBuffer.position(0);
 
         colorBuffer.clear();
-        colorBuffer.put(bufferCreator.createVertexBufferFlat(positions, imageData, IMAGE_SIZE));
+        colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, IMAGE_SIZE));
         colorBuffer.position(0);
 
         if (++iterator > FRAME_COUNT) {
