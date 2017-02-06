@@ -1,5 +1,6 @@
 package com.mlauncher.logic.zm_air;
 
+import com.mlauncher.logic.SmokeState;
 import com.mlauncher.model.SmokeItem;
 
 import org.json.JSONException;
@@ -50,7 +51,7 @@ public class SmokeItemParser {
         SmokeItem item = new SmokeItem();
         item.type = type;
         item.value = object.getString("current_value");
-        item.state = object.getString("state");
+        item.state = SmokeState.fromString(object.getString("state"));
         item.probe = object.getString("name");
         item.time = time;
 

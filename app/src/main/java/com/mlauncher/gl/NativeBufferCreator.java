@@ -10,7 +10,7 @@ public class NativeBufferCreator {
     public native float translateColorToHeight(int color);
     public native int randomNoise();
     public native float[] createVertexBufferFlat(int[] positions, int[] imageData, int imageSize);
-    public native float[] createColorBufferFlat(int[] positions, int[] imageData, int imageSize);
+    public native float[] createColorBufferFlat(int[] positions, int[] imageData, int imageSize, float[] colorMask);
 
     static {
         System.loadLibrary("native-lib");

@@ -30,6 +30,7 @@ import com.getpebble.android.kit.PebbleKit;
 import com.mlauncher.dotpad.DotManager;
 import com.mlauncher.gl.GameRenderer;
 import com.mlauncher.logic.FilterController;
+import com.mlauncher.logic.SmokeLiveColor;
 import com.mlauncher.logic.ussd.Caller;
 import com.mlauncher.logic.ussd.CallerLimiter;
 import com.mlauncher.logic.ussd.model.AccountBalance;
@@ -50,6 +51,8 @@ import com.mlauncher.view.DayTimeView;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity
         extends Activity
@@ -96,7 +99,7 @@ public class MainActivity
     private GameRenderer gameRenderer;
     private SensorManager sensorManager;
     private Sensor gyroscopeSensor;
-    private CallerLimiter callerLimiter;
+    //private CallerLimiter callerLimiter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,11 +124,13 @@ public class MainActivity
 
         new ShellUtils().isDeviceRooted();
 
-        Caller.getInstance(this);
-        Caller.getInstance(this).setListener(this);
+        //Caller.getInstance(this);
+        //Caller.getInstance(this).setListener(this);
 
-        callerLimiter = new CallerLimiter(this);
+        //callerLimiter = new CallerLimiter(this);
     }
+
+    private int i = 0;
 
     private void initializeGLWallpaper() {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -205,6 +210,7 @@ public class MainActivity
                 @Override
                 public void onItems(SmokeItem pm10, SmokeItem pm2_5) {
                     dayTimeView.setSmokeItems(pm10, pm2_5);
+                    //gameRenderer.applySmoke(SmokeLiveColor.takeColorMask(pm2_5.state, pm10.state));
                 }
             }).execute();
         }
@@ -321,10 +327,11 @@ public class MainActivity
 
         loadSmoke();
         loadDotsInfo();
+        loadDayTime();
 
-        if (callerLimiter.canCall()) {
+       /* if (callerLimiter.canCall()) {
             Caller.getInstance(null).retrieveInfo();
-        }
+        }*/
 
         if (findViewById(R.id.pebble_disconnected) != null) {
             boolean isConnected = PebbleKit.isWatchConnected(this);
@@ -356,7 +363,7 @@ public class MainActivity
         if (gameRenderer != null)
             gameRenderer.destroy();
 
-        Caller.getInstance(this).cleanUp();
+        //Caller.getInstance(this).cleanUp();
 
         filterController.destroyButtons();
         filterButtonListener = null;

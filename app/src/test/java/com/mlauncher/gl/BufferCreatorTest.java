@@ -56,9 +56,9 @@ public class BufferCreatorTest {
         int[] grid = new GridCreator().makeGrid(2, 2);
         int[] imageDataFlat = new int [] {  1, 2, 2, 3  };
 
-        int[] result = bufferCreator.createVertexBufferFlat(grid, imageDataFlat, 2);
+        float[] result = bufferCreator.createVertexBufferFlat(grid, imageDataFlat, 2);
 
-        assertArrayEquals(VERTEX_RESULT_INT, result);
+        assertArrayEquals(VERTEX_RESULT, result, 0f);
     }
 
     @Test

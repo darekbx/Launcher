@@ -2,6 +2,7 @@ package com.mlauncher.zm_air;
 
 import com.mlauncher.BuildConfig;
 import com.mlauncher.FileUtils;
+import com.mlauncher.logic.SmokeState;
 import com.mlauncher.logic.zm_air.SmokeItemParser;
 import com.mlauncher.model.SmokeItem;
 
@@ -41,14 +42,14 @@ public class SmokeItemParserTest {
         assertEquals(items[0].type, SmokeItem.Type.PM10);
         assertEquals(items[0].trend, SmokeItem.Trend.DOWN);
         assertEquals(items[0].value, "80.9 µg/m3");
-        assertEquals(items[0].state, "notbad");
+        assertEquals(items[0].state, SmokeState.NOTBAD);
         assertEquals(items[0].time, "2016-09-30 09:00:00");
         assertEquals(items[0].probe, "Warszawa-Komunikacyjna");
 
         assertEquals(items[1].type, SmokeItem.Type.PM2_5);
         assertEquals(items[1].trend, SmokeItem.Trend.DOWN);
         assertEquals(items[1].value, "21.1 µg/m3");
-        assertEquals(items[1].state, "good");
+        assertEquals(items[1].state, SmokeState.GOOD);
         assertEquals(items[1].time, "2016-09-30 09:00:00");
         assertEquals(items[1].probe, "Warszawa-Komunikacyjna");
 

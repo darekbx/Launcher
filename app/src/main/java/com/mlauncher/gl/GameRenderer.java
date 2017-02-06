@@ -6,6 +6,11 @@ import javax.microedition.khronos.opengles.GL10;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.opengl.GLU;
 import android.opengl.GLSurfaceView.Renderer;
 
@@ -53,6 +58,12 @@ public class GameRenderer implements Renderer {
                         frames = 0;
                     }
                 });
+    }
+
+    public void applySmoke(float[] colorMask) {
+       if (surface != null) {
+           surface.refreshColorMask(colorMask);
+       }
     }
 
     protected void createSurface(Context context) {

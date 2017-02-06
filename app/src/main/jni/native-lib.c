@@ -37,7 +37,7 @@ float* createVertexBufferFlat(jint* positions, int positionsCount, jint* imageDa
     return vertexBuffer;
 }
 
-float* createColorBufferFlat(jint* positions, int positionsCount, jint* imageData, jint imageSize) {
+float* createColorBufferFlat(jint* positions, int positionsCount, jint* imageData, jint imageSize, jfloat* colorMask) {
     float *colorBuffer = malloc(positionsCount*sizeof(float));
     int index = 0;
     for (int i = 0; i < positionsCount; i += 4) {
@@ -45,6 +45,11 @@ float* createColorBufferFlat(jint* positions, int positionsCount, jint* imageDat
         int positionY = positions[index++];
         int colorValue = imageData[positionY * imageSize + positionX];
         int* extractedColor = extractColor(colorValue);
+
+        extractedColor[0] = extractedColor[0] * colorMask[0];
+        extractedColor[1] = extractedColor[1] * colorMask[1];
+        extractedColor[2] = extractedColor[2] * colorMask[2];
+
         for (int j = 0; j <= 3; j++) {
             colorBuffer[i + j] = extractedColor[j] / 255.0;
         }
@@ -107,18 +112,21 @@ Java_com_mlauncher_gl_NativeBufferCreator_createColorBufferFlat(JNIEnv *env,
                                                                    jobject instance,
                                                                    jintArray positions_,
                                                                    jintArray imageData_,
-                                                                   jint imageSize) {
+                                                                   jint imageSize,
+                                                                   jfloatArray colorMask_) {
     const jsize positionsLength = (*env)->GetArrayLength(env, positions_);
     jint *positions = (*env)->GetIntArrayElements(env, positions_, NULL);
     jint *imageData = (*env)->GetIntArrayElements(env, imageData_, NULL);
+    jfloat *colorMask = (*env)->GetFloatArrayElements(env, colorMask_, NULL);
 
     int positionsCount = positionsLength * 2;
-    float *colorBuffer = createColorBufferFlat(positions, positionsCount, imageData, imageSize);
+    float *colorBuffer = createColorBufferFlat(positions, positionsCount, imageData, imageSize, colorMask);
 
     jfloatArray result = (*env)->NewFloatArray(env, positionsCount);
 
     (*env)->ReleaseIntArrayElements(env, positions_, positions, 0);
     (*env)->ReleaseIntArrayElements(env, imageData_, imageData, 0);
+    (*env)->ReleaseFloatArrayElements(env, colorMask_, colorMask, 0);
     (*env)->SetFloatArrayRegion(env, result, 0, positionsCount, colorBuffer);
 
     memset(colorBuffer, 0, sizeof(*colorBuffer));

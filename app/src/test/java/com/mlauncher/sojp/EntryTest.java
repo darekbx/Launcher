@@ -1,5 +1,6 @@
 package com.mlauncher.sojp;
 
+import com.mlauncher.logic.SmokeState;
 import com.mlauncher.logic.sojp.Entry;
 import com.mlauncher.model.SmokeItem;
 
@@ -27,7 +28,7 @@ public class EntryTest {
         assertEquals(smokeItem.probe, entry.station);
         assertEquals(smokeItem.value, entry.value + " " + entry.unit);
         assertEquals(smokeItem.time, Entry.smokeItemDate(entry.date));
-        assertEquals(smokeItem.state, "good");
+        assertEquals(smokeItem.state, SmokeState.GOOD);
         assertEquals(smokeItem.getArrow(), "-");
     }
 
@@ -46,7 +47,7 @@ public class EntryTest {
         assertEquals(smokeItem.probe, entry.station);
         assertEquals(smokeItem.value, entry.value + " " + entry.unit);
         assertEquals(smokeItem.time, Entry.smokeItemDate(entry.date));
-        assertEquals(smokeItem.state, "verybad");
+        assertEquals(smokeItem.state, SmokeState.VERYBAD);
         assertEquals(smokeItem.getArrow(), "-");
     }
 
@@ -56,19 +57,19 @@ public class EntryTest {
         int step = 50;
 
         entry.value = 45;
-        assertEquals("good", entry.determineState(step));
+        assertEquals(SmokeState.GOOD, entry.determineState(step));
 
         entry.value = 90;
-        assertEquals("notbad", entry.determineState(step));
+        assertEquals(SmokeState.NOTBAD, entry.determineState(step));
 
         entry.value = 120;
-        assertEquals("bad", entry.determineState(step));
+        assertEquals(SmokeState.BAD, entry.determineState(step));
 
         entry.value = 180.5;
-        assertEquals("verybad", entry.determineState(step));
+        assertEquals(SmokeState.VERYBAD, entry.determineState(step));
 
         entry.value = 200.01;
-        assertEquals("extremelybad", entry.determineState(step));
+        assertEquals(SmokeState.EXTREMELYBAD, entry.determineState(step));
     }
 
     @Test
@@ -77,19 +78,19 @@ public class EntryTest {
         int step = 25;
 
         entry.value = 10;
-        assertEquals("good", entry.determineState(step));
+        assertEquals(SmokeState.GOOD, entry.determineState(step));
 
         entry.value = 35;
-        assertEquals("notbad", entry.determineState(step));
+        assertEquals(SmokeState.NOTBAD, entry.determineState(step));
 
         entry.value = 51;
-        assertEquals("bad", entry.determineState(step));
+        assertEquals(SmokeState.BAD, entry.determineState(step));
 
         entry.value = 80;
-        assertEquals("verybad", entry.determineState(step));
+        assertEquals(SmokeState.VERYBAD, entry.determineState(step));
 
         entry.value = 100.01;
-        assertEquals("extremelybad", entry.determineState(step));
+        assertEquals(SmokeState.EXTREMELYBAD, entry.determineState(step));
     }
 
     @Test

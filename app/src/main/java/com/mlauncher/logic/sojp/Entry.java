@@ -1,5 +1,6 @@
 package com.mlauncher.logic.sojp;
 
+import com.mlauncher.logic.SmokeState;
 import com.mlauncher.model.SmokeItem;
 
 /**
@@ -26,19 +27,19 @@ public class Entry {
         return new StringBuilder(date.replace("/", "-")).insert(10, ' ').toString();
     }
 
-    public String determineState(final int step) {
+    public SmokeState determineState(final int step) {
         if (value <= step) {
-            return "good";
+            return SmokeState.GOOD;
         } else if (value > step && value <= step * 2) {
-            return "notbad";
+            return SmokeState.NOTBAD;
         } else if (value > step * 2 && value <= step * 3) {
-            return "bad";
+            return SmokeState.BAD;
         } else if (value > step * 3 && value <= step * 4) {
-            return "verybad";
+            return SmokeState.VERYBAD;
         } else if (value > step * 4) {
-            return "extremelybad";
+            return SmokeState.EXTREMELYBAD;
         }
-        return null;
+        return SmokeState.HAZARDOUS;
     }
 
     public boolean isPM10() {
