@@ -21,6 +21,7 @@ public class DayTimeView extends View {
 
     private final Paint commonPaint;
     private final Paint airQualityPaint;
+    private final Paint warningPaint;
 
     private DayItem currentDay;
 
@@ -33,6 +34,7 @@ public class DayTimeView extends View {
     private int wallpaperFPS;
 
     private String screenOn;
+    private boolean isMobileDataOn;
 
     public DayTimeView(Context context, AttributeSet attrs) {
 
@@ -46,6 +48,12 @@ public class DayTimeView extends View {
 
         airQualityPaint = new Paint(commonPaint);
         airQualityPaint.setTextAlign(Paint.Align.RIGHT);
+
+        warningPaint = new Paint();
+        warningPaint.setAntiAlias(true);
+        warningPaint.setColor(Color.RED);
+        warningPaint.setTextSize(35);
+        warningPaint.setTypeface(Typeface.MONOSPACE);
     }
 
     public void setCurrentDay(DayItem currentDay) {
@@ -69,12 +77,24 @@ public class DayTimeView extends View {
         invalidate();
     }
 
+    public void setIsMobileDataOn(boolean isOn) {
+        this.isMobileDataOn = isOn;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if (currentDay == null)
             return;
         drawLegend(canvas, currentDay);
         drawAirQualityInfo(canvas);
+        drawMobileDataWarning(canvas);
+    }
+
+    private void drawMobileDataWarning(Canvas canvas) {
+        if (!isMobileDataOn) {
+            return;
+        }
+        canvas.drawText("WARNING! Mobile data is turned ON", 10, 170, warningPaint);
     }
 
     private void drawLegend(Canvas canvas, DayItem item) {

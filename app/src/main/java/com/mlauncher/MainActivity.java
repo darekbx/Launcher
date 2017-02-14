@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
@@ -301,6 +302,10 @@ public class MainActivity
         }
     }
 
+    private boolean isMobileDataOn() {
+        return Settings.Global.getInt(getContentResolver(), "mobile_data", 0) == 1;
+    }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout != null && drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
@@ -328,6 +333,7 @@ public class MainActivity
         loadSmoke();
         loadDotsInfo();
         loadDayTime();
+        dayTimeView.setIsMobileDataOn(isMobileDataOn());
 
        /* if (callerLimiter.canCall()) {
             Caller.getInstance(null).retrieveInfo();
