@@ -1,42 +1,39 @@
 package com.mlauncher.logic;
 
+import android.support.annotation.DrawableRes;
+
+import com.mlauncher.R;
+
 /**
  * Created by daba on 2017-02-06.
  */
 
 public class SmokeLiveColor {
 
-    public static final float[][] COLOR_STATES = new float[][]{
-            {0.75f, 2f, 1f},
-            {0.8f, 1.7f, 1f},
-            {1.25f, 2.5f, 1f},
-            {1.75f, 2f, 1f},
-            {1.75f, 1.5f, 1f},
-            {2f, 1.25f, 1f},
-            {2.25f, 1f, 1f},
-            {2.5f, 0.75f, 1f},
-            {2f, 0.2f, 1.5f}
-    };
-
-    public static float[] takeColorMask(SmokeState stateA, SmokeState stateB) {
+    @DrawableRes
+    public static int takeImageByState(SmokeState stateA, SmokeState stateB) {
         if (hasTwoStates(stateA, stateB, SmokeState.GOOD, SmokeState.GOOD)) {
-            return COLOR_STATES[0];
+            return R.drawable.ring_good_good;
         } else if (hasTwoStates(stateA, stateB, SmokeState.GOOD, SmokeState.NOTBAD)) {
-            return COLOR_STATES[1];
+            return R.drawable.ring_good_notbad;
         } else if (hasTwoStates(stateA, stateB, SmokeState.NOTBAD, SmokeState.NOTBAD)) {
-            return COLOR_STATES[2];
+            return R.drawable.ring_notbad_notbad;
         } else if (hasTwoStates(stateA, stateB, SmokeState.NOTBAD, SmokeState.BAD)) {
-            return COLOR_STATES[3];
+            return R.drawable.ring_notbad_bad;
         } else if (hasTwoStates(stateA, stateB, SmokeState.BAD, SmokeState.BAD)) {
-            return COLOR_STATES[4];
+            return R.drawable.ring_bad_bad;
         } else if (hasTwoStates(stateA, stateB, SmokeState.BAD, SmokeState.VERYBAD)) {
-            return COLOR_STATES[5];
+            return R.drawable.ring_bad_verybad;
         } else if (hasTwoStates(stateA, stateB, SmokeState.VERYBAD, SmokeState.VERYBAD)) {
-            return COLOR_STATES[6];
-        } else if (hasTwoStates(stateA, stateB, SmokeState.VERYBAD, SmokeState.HAZARDOUS)) {
-            return COLOR_STATES[7];
+            return R.drawable.ring_verybad_verybad;
+        } else if (hasTwoStates(stateA, stateB, SmokeState.VERYBAD, SmokeState.EXTREMELYBAD)) {
+            return R.drawable.ring_verybad_extremalybad;
+        } else if (hasTwoStates(stateA, stateB, SmokeState.EXTREMELYBAD, SmokeState.EXTREMELYBAD)) {
+            return R.drawable.ring_extremalybad_extremalybad;
+        } else if (hasTwoStates(stateA, stateB, SmokeState.EXTREMELYBAD, SmokeState.HAZARDOUS)) {
+            return R.drawable.ring_extremalybad_hazadrous;
         } else {
-            return COLOR_STATES[8];
+            return R.drawable.ring_hazadrous_hazadrous;
         }
     }
 

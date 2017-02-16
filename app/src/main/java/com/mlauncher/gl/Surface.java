@@ -21,9 +21,8 @@ public class Surface {
     private FloatBuffer colorBuffer;
     private final int[] positions;
     private final int triangleCount;
-    private final int[] imageData;
+    private int[] imageData;
     private int imageSize;
-    private float[] colorMask = new float[] { 1f, 1f, 1f };
 
     public Surface(Bitmap bitmap) {
         gridCreator = new GridCreator();
@@ -34,7 +33,7 @@ public class Surface {
         imageData = ImageUtils.extractFlat(bitmap);
 
         float[] vertices = bufferCreator.createVertexBufferFlat(positions, imageData, imageSize);
-        float[] colors = bufferCreator.createColorBufferFlat(positions, imageData, imageSize, colorMask);
+        float[] colors = bufferCreator.createColorBufferFlat(positions, imageData, imageSize);
 
         triangleCount = vertices.length / 3;
 
@@ -49,11 +48,15 @@ public class Surface {
         colorBuffer.position(0);
     }
 
-    public void refreshColorMask(float[] colorMask) {
+    public void updateImage(Bitmap bitmap) {
+        imageData = ImageUtils.extractFlat(bitmap);
+        vertexBuffer.clear();
+        vertexBuffer.put(bufferCreator.createVertexBufferFlat(positions, imageData, imageSize));
+        vertexBuffer.position(0);
+
         colorBuffer.clear();
-        colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, imageSize, colorMask));
+        colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, imageSize));
         colorBuffer.position(0);
-        refresh();
     }
 
     public void refresh() {

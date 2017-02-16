@@ -50,7 +50,7 @@ public class FrameSurface {
 
         positions = gridCreator.makeGrid(IMAGE_SIZE, IMAGE_SIZE);
         float[] vertices = bufferCreator.createVertexBufferFlat(positions, imagesData.get(0).imageData, IMAGE_SIZE);
-        float[] colors = bufferCreator.createColorBufferFlat(positions, imagesData.get(0).imageData, IMAGE_SIZE, new float[3]);
+        float[] colors = bufferCreator.createColorBufferFlat(positions, imagesData.get(0).imageData, IMAGE_SIZE);
 
         triangleCount = vertices.length / 3;
 
@@ -85,7 +85,7 @@ public class FrameSurface {
         vertexBuffer.position(0);
 
         colorBuffer.clear();
-        colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, IMAGE_SIZE, new float[3]));
+        colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, IMAGE_SIZE));
         colorBuffer.position(0);
 
         if (++iterator > FRAME_COUNT) {

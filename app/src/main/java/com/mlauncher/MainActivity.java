@@ -33,7 +33,6 @@ import com.mlauncher.gl.GameRenderer;
 import com.mlauncher.logic.FilterController;
 import com.mlauncher.logic.SmokeLiveColor;
 import com.mlauncher.logic.ussd.Caller;
-import com.mlauncher.logic.ussd.CallerLimiter;
 import com.mlauncher.logic.ussd.model.AccountBalance;
 import com.mlauncher.logic.ussd.model.InternetBalance;
 import com.mlauncher.logic.zm_air.SmokeApi;
@@ -52,8 +51,6 @@ import com.mlauncher.view.DayTimeView;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity
         extends Activity
@@ -211,7 +208,7 @@ public class MainActivity
                 @Override
                 public void onItems(SmokeItem pm10, SmokeItem pm2_5) {
                     dayTimeView.setSmokeItems(pm10, pm2_5);
-                    //gameRenderer.applySmoke(SmokeLiveColor.takeColorMask(pm2_5.state, pm10.state));
+                    gameRenderer.applySmoke(SmokeLiveColor.takeImageByState(pm2_5.state, pm10.state));
                 }
             }).execute();
         }

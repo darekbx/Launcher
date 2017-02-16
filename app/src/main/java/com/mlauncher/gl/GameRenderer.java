@@ -6,13 +6,9 @@ import javax.microedition.khronos.opengles.GL10;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.opengl.GLU;
 import android.opengl.GLSurfaceView.Renderer;
+import android.support.annotation.DrawableRes;
 
 import com.mlauncher.R;
 
@@ -40,10 +36,12 @@ public class GameRenderer implements Renderer {
     private Subscription fpsSubscription;
     private Bitmap texture;
     private Surface surface;
+    private Context context;
     private float tiltX = -60f;
     private int frames = 0;
 
     public GameRenderer(Context context, final Listener listener) {
+        this.context = context;
         createSurface(context);
         fpsSubscription = Observable
                 .just(0)
@@ -60,9 +58,9 @@ public class GameRenderer implements Renderer {
                 });
     }
 
-    public void applySmoke(float[] colorMask) {
+    public void applySmoke(@DrawableRes int resource) {
        if (surface != null) {
-           surface.refreshColorMask(colorMask);
+           surface.updateImage(BitmapFactory.decodeResource(context.getResources(), resource));
        }
     }
 
