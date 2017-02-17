@@ -46,7 +46,7 @@ float* createColorBufferFlat(jint* positions, int positionsCount, jint* imageDat
         int colorValue = imageData[positionY * imageSize + positionX];
         int* extractedColor = extractColor(colorValue);
         for (int j = 0; j <= 3; j++) {
-            colorBuffer[i + j] = extractedColor[j] / 255.0;
+            colorBuffer[i + j] = (extractedColor[j] / 255.0);
         }
     }
     return colorBuffer;

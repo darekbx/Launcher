@@ -1,6 +1,7 @@
 package com.mlauncher.gl;
 
 import android.graphics.Bitmap;
+import android.opengl.GLES20;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -50,10 +51,6 @@ public class Surface {
 
     public void updateImage(Bitmap bitmap) {
         imageData = ImageUtils.extractFlat(bitmap);
-        vertexBuffer.clear();
-        vertexBuffer.put(bufferCreator.createVertexBufferFlat(positions, imageData, imageSize));
-        vertexBuffer.position(0);
-
         colorBuffer.clear();
         colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, imageSize));
         colorBuffer.position(0);
