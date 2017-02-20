@@ -208,7 +208,7 @@ public class MainActivity
                 @Override
                 public void onItems(SmokeItem pm10, SmokeItem pm2_5) {
                     dayTimeView.setSmokeItems(pm10, pm2_5);
-                    gameRenderer.applySmoke(SmokeLiveColor.takeImageByState(pm2_5.state, pm10.state));
+                    //gameRenderer.applySmoke(SmokeLiveColor.takeImageByState(pm2_5.state, pm10.state));
                 }
             }).execute();
         }
