@@ -40,8 +40,8 @@ public class SmokeItemParserTest {
         assertEquals(items.length, 2);
 
         assertEquals(items[0].type, SmokeItem.Type.PM10);
-        assertEquals(items[0].trend, SmokeItem.Trend.DOWN);
-        assertEquals(items[0].value, "80.9 µg/m3");
+        assertEquals(items[0].trend, SmokeItem.Trend.UP);
+        assertEquals(items[0].value, "53.0 µg/m3");
         assertEquals(items[0].state, SmokeState.NOTBAD);
         assertEquals(items[0].time, "2016-09-30 09:00:00");
         assertEquals(items[0].probe, "Warszawa-Komunikacyjna");

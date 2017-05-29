@@ -6,12 +6,18 @@ import com.mlauncher.model.SmokeItem;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 /**
  * Created by daba on 2016-09-30.
  */
 public class SmokeItemParser {
 
-    public static final String[] PROBE_NAMES = new String[]{"sonda1", "sonda2", "sonda3", "sonda4"};
+    public static final String[] PROBE_NAMES = new String[]{
+            "Warszawa-Marszałkowska",
+            "Warszawa-Komunikacyjna",
+            "Warszawa-Ursynów",
+            "Warszawa-Targówek"};
 
     public SmokeItem[] parseJson(String json) throws JSONException {
         JSONObject root = new JSONObject(json);
@@ -20,28 +26,38 @@ public class SmokeItemParser {
         JSONObject pm2_5 = results.getJSONObject("pm_25");
         String time = root.getString("time");
 
-        if (checkProbe(pm10, PROBE_NAMES[1])) {
-            return extractProbe(pm10, pm2_5, time, PROBE_NAMES[1]);
-        } else if (checkProbe(pm10, PROBE_NAMES[2])) {
-            return extractProbe(pm10, pm2_5, time, PROBE_NAMES[2]);
-        } else if (checkProbe(pm10, PROBE_NAMES[0])) {
-            return extractProbe(pm10, pm2_5, time, PROBE_NAMES[0]);
-        } else if (checkProbe(pm10, PROBE_NAMES[3])) {
-            return extractProbe(pm10, pm2_5, time, PROBE_NAMES[3]);
+        for (String name : PROBE_NAMES) {
+            if (checkProbe(pm10, name)) {
+                return extractProbe(pm10, pm2_5, time, name);
+            }
         }
 
         return null;
     }
 
     public boolean checkProbe(JSONObject pm10, String probeName) throws JSONException {
-        return pm10.getJSONObject(probeName).optString("current_value", null) != null;
+        return getChildByName(pm10, probeName).optString("current_value", null) != null;
     }
 
-    public SmokeItem[] extractProbe(JSONObject pm10, JSONObject pm2_5, String time, String probeName) throws JSONException {
+    public SmokeItem[] extractProbe(JSONObject pm10, JSONObject pm2_5, String time, String name) throws JSONException {
+        JSONObject pm10Object = getChildByName(pm10, name);
+        JSONObject pm2_5Object = getChildByName(pm2_5, name);
         return new SmokeItem[]{
-                parseObjectToItem(SmokeItem.Type.PM10, pm10.getJSONObject(probeName), time),
-                parseObjectToItem(SmokeItem.Type.PM2_5, pm2_5.getJSONObject(probeName), time),
+                parseObjectToItem(SmokeItem.Type.PM10, pm10Object, time),
+                parseObjectToItem(SmokeItem.Type.PM2_5, pm2_5Object, time),
         };
+    }
+
+    public JSONObject getChildByName(JSONObject parent, String name) throws JSONException {
+        Iterator<String> iterator = parent.keys();
+        while (iterator.hasNext()) {
+            String probeName = iterator.next();
+            JSONObject child = parent.getJSONObject(probeName);
+            if (child.optString("name").equals(name)) {
+                return child;
+            }
+        }
+        return null;
     }
 
     public SmokeItem parseObjectToItem(SmokeItem.Type type, JSONObject object, String time) throws JSONException {

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
  * Created by daba on 2016-09-30.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(manifest = "src/main/AndroidManifest.xml", constants = BuildConfig.class)
 public class SmokeApiTest {
 
     @Test

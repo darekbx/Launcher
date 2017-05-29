@@ -29,7 +29,7 @@ public class FileUtils {
     }
 
     public static File fileFromResources(String fileName) {
-        String testRestDir = new File("src/test/res").getAbsolutePath();
+        String testRestDir = new File("app/src/test/res").getAbsolutePath();
         return new File(testRestDir, fileName);
     }
 }
