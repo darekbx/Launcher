@@ -27,11 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.getpebble.android.kit.PebbleKit;
 import com.mlauncher.dotpad.DotManager;
 import com.mlauncher.gl.GameRenderer;
 import com.mlauncher.logic.FilterController;
-import com.mlauncher.logic.SmokeLiveColor;
 import com.mlauncher.logic.ussd.Caller;
 import com.mlauncher.logic.ussd.model.AccountBalance;
 import com.mlauncher.logic.ussd.model.InternetBalance;
@@ -335,12 +333,6 @@ public class MainActivity
        /* if (callerLimiter.canCall()) {
             Caller.getInstance(null).retrieveInfo();
         }*/
-
-        if (findViewById(R.id.pebble_disconnected) != null) {
-            boolean isConnected = PebbleKit.isWatchConnected(this);
-            findViewById(R.id.pebble_disconnected).setVisibility(
-                    isConnected ? View.GONE : View.VISIBLE);
-        }
 
         if (surfaceView != null && gameRenderer != null) {
             surfaceView.onResume();
