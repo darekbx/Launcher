@@ -17,7 +17,7 @@ public class FrameGameRenderer extends GameRenderer {
     }
 
     @Override
-    protected void createSurface(Context context) {
+    public void createSurface(Context context) {
         surface = new FrameSurface(context);
     }
 
@@ -28,7 +28,7 @@ public class FrameGameRenderer extends GameRenderer {
         gl.glLoadIdentity();
 
         // for wallpaper
-        gl.glTranslatef(-50f, -55.0f, -300.0f);
+        gl.glTranslatef(-42f, -55.0f, -350.0f);
 
         // for dots
         //gl.glTranslatef(-55f, -45.0f, -270.0f);

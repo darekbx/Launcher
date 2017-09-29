@@ -51,9 +51,14 @@ public class Surface {
 
     public void updateImage(Bitmap bitmap) {
         imageData = ImageUtils.extractFlat(bitmap);
+
         colorBuffer.clear();
         colorBuffer.put(bufferCreator.createColorBufferFlat(positions, imageData, imageSize));
         colorBuffer.position(0);
+
+        vertexBuffer.clear();
+        vertexBuffer.put(bufferCreator.createVertexBufferFlat(positions, imageData, imageSize));
+        vertexBuffer.position(0);
     }
 
     public void refresh() {

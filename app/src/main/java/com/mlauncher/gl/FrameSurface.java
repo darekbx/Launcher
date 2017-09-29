@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.mlauncher.R;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -20,7 +22,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class FrameSurface {
 
     private static final int IMAGE_SIZE = 64;
-    private static final int FRAME_COUNT = 71;
+    private static final int FRAME_COUNT = 7;
 
     private GridCreator gridCreator;
     private NativeBufferCreator bufferCreator;
@@ -71,7 +73,7 @@ public class FrameSurface {
         imagesData = new ArrayList<>(FRAME_COUNT);
         for (int i = 0; i <= framesCount; i++) {
             int resourceId = resources.getIdentifier("f" + i, "drawable", context.getPackageName());
-            Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceId);
+            Bitmap bitmap =  BitmapFactory.decodeResource(resources, resourceId);
             int[] imageData = ImageUtils.extractFlat(bitmap);
             bitmap.recycle();
             imagesData.add(new ImageDataWrapper(imageData));

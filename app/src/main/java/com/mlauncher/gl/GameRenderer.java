@@ -4,12 +4,14 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLU;
 import android.opengl.GLSurfaceView.Renderer;
 import android.support.annotation.DrawableRes;
+import android.util.Log;
 
 import com.mlauncher.R;
 
@@ -29,6 +31,11 @@ public class GameRenderer implements Renderer {
 
     private static final int FPS_DELAY = 1;
     private static boolean DISABLE_TILT = true;
+    private static final int[] PLANETS = new int[] {
+            R.drawable.earth,
+            R.drawable.mercury,
+            R.drawable.mars,
+            R.drawable.moon };
 
     public interface Listener {
         void onFramesPerSecond(int framesPerSecond);
@@ -38,10 +45,11 @@ public class GameRenderer implements Renderer {
     private Bitmap texture;
     private Surface surface;
     private Context context;
-    private float tiltX = -60f;
+    private float tiltX = -30f;
     private int frames = 0;
 
-    public GameRenderer(Context context, final Listener listener) {
+    public GameRenderer(final Context context, final Listener listener) {
+        //final Resources resources = context.getResources();
         this.context = context;
         createSurface(context);
         fpsSubscription = Observable
@@ -65,8 +73,8 @@ public class GameRenderer implements Renderer {
        }
     }
 
-    protected void createSurface(Context context) {
-        texture = BitmapFactory.decodeResource(context.getResources(), R.drawable.ring);
+    public void createSurface(Context context) {
+        texture = BitmapFactory.decodeResource(context.getResources(), PLANETS[1]);
         surface = new Surface(texture);
     }
 
@@ -104,7 +112,7 @@ public class GameRenderer implements Renderer {
         gl.glLoadIdentity();
 
         // for wallpaper
-        gl.glTranslatef(-42f, -55.0f, -300.0f);
+        gl.glTranslatef(-42f, -45.0f, -350.0f);
 
         // for dots
         //gl.glTranslatef(-55f, -45.0f, -270.0f);
