@@ -1,11 +1,13 @@
 package com.mlauncher.view;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import com.mlauncher.logic.ussd.model.AccountBalance;
 import com.mlauncher.logic.ussd.model.InternetBalance;
+import com.mlauncher.logic.weather.model.WeatherConditions;
 import com.mlauncher.model.DayItem;
 import com.mlauncher.model.SmokeItem;
 
@@ -30,6 +32,7 @@ public class DayTimeView extends View {
 
     private AccountBalance accountBalance;
     private InternetBalance internetBalance;
+    private WeatherConditions weatherConditions;
 
     private int wallpaperFPS;
 
@@ -54,6 +57,10 @@ public class DayTimeView extends View {
         warningPaint.setColor(Color.RED);
         warningPaint.setTextSize(35);
         warningPaint.setTypeface(Typeface.MONOSPACE);
+    }
+
+    public void setWeather(WeatherConditions weatherConditions) {
+        this.weatherConditions = weatherConditions;
     }
 
     public void setCurrentDay(DayItem currentDay) {
@@ -88,6 +95,7 @@ public class DayTimeView extends View {
         drawLegend(canvas, currentDay);
         drawAirQualityInfo(canvas);
         drawMobileDataWarning(canvas);
+        drawWeather(canvas);
     }
 
     private void drawMobileDataWarning(Canvas canvas) {
@@ -141,6 +149,14 @@ public class DayTimeView extends View {
             canvas.drawText(pM10.time, getWidth() - 20, 100, airQualityPaint);
             canvas.drawText(pM10.probe, getWidth() - 20, 130, airQualityPaint);
         }
+    }
+
+    private void drawWeather(Canvas canvas) {
+        if (weatherConditions == null)
+            return;
+
+        DecimalFormat decimalFormat = new DecimalFormat("##.#");
+        canvas.drawText(decimalFormat.format(weatherConditions.temperature) + "°", getWidth() - 20, 160, airQualityPaint);
     }
 
     public void setAccountBalance(AccountBalance accountBalance) {

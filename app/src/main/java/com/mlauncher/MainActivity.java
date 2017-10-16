@@ -33,6 +33,8 @@ import com.mlauncher.logic.FilterController;
 import com.mlauncher.logic.ussd.Caller;
 import com.mlauncher.logic.ussd.model.AccountBalance;
 import com.mlauncher.logic.ussd.model.InternetBalance;
+import com.mlauncher.logic.weather.WeatherConditionsController;
+import com.mlauncher.logic.weather.model.WeatherConditions;
 import com.mlauncher.logic.zm_air.SmokeApi;
 import com.mlauncher.logic.SunriseSunset;
 import com.mlauncher.logic.TimeManager;
@@ -90,6 +92,8 @@ public class MainActivity
     private AppsAdapter appsAdapter;
     private TimeManager timeManager;
     private FilterController filterController;
+    private WeatherConditionsController weatherConditionsController;
+    private WeatherConditionsController.Listener weatherListener;
 
     private GLSurfaceView surfaceView;
     private GameRenderer gameRenderer;
@@ -114,6 +118,7 @@ public class MainActivity
         loadDayTime();
         loadSmoke();
         registerBroadcasts();
+        loadIf();
         initializeGLWallpaper();
 
         filterController = new FilterController(this, filterTable, filterButtonListener);
@@ -127,6 +132,18 @@ public class MainActivity
     }
 
     private int i = 0;
+
+    private void loadIf() {
+        weatherListener = new WeatherConditionsController.Listener() {
+            @Override
+            public void onData(WeatherConditions weatherConditions) {
+                if (dayTimeView == null)
+                    return;
+                dayTimeView.setWeather(weatherConditions);
+            }
+        };
+        weatherConditionsController = new WeatherConditionsController(weatherListener);
+    }
 
     private void initializeGLWallpaper() {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -328,6 +345,7 @@ public class MainActivity
         loadSmoke();
         loadDotsInfo();
         loadDayTime();
+        weatherConditionsController.refreshWeatherConditions();
         dayTimeView.setIsMobileDataOn(isMobileDataOn());
 
        /* if (callerLimiter.canCall()) {
@@ -357,6 +375,9 @@ public class MainActivity
 
         if (gameRenderer != null)
             gameRenderer.destroy();
+
+        if (weatherConditionsController != null)
+            weatherConditionsController.setListener(null);
 
         //Caller.getInstance(this).cleanUp();
 

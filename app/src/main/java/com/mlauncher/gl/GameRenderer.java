@@ -45,7 +45,7 @@ public class GameRenderer implements Renderer {
     private Bitmap texture;
     private Surface surface;
     private Context context;
-    private float tiltX = -30f;
+    private float tiltX = -60f;
     private int frames = 0;
 
     public GameRenderer(final Context context, final Listener listener) {
@@ -74,7 +74,7 @@ public class GameRenderer implements Renderer {
     }
 
     public void createSurface(Context context) {
-        texture = BitmapFactory.decodeResource(context.getResources(), PLANETS[1]);
+        texture = BitmapFactory.decodeResource(context.getResources(), R.drawable.ring);
         surface = new Surface(texture);
     }
 
