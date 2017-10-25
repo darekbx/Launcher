@@ -155,8 +155,10 @@ public class DayTimeView extends View {
         if (weatherConditions == null)
             return;
 
-        DecimalFormat decimalFormat = new DecimalFormat("##.#");
-        canvas.drawText(decimalFormat.format(weatherConditions.temperature) + "°", getWidth() - 20, 160, airQualityPaint);
+        String temperature = String.format("Temperature: %.1f°", weatherConditions.temperature);
+        String windChill = String.format("Wind chill: %.1f°", weatherConditions.windChill);
+        canvas.drawText(temperature, getWidth() - 20, 190, airQualityPaint);
+        canvas.drawText(windChill, getWidth() - 20, 220, airQualityPaint);
     }
 
     public void setAccountBalance(AccountBalance accountBalance) {
