@@ -34,17 +34,17 @@
 
             <ImageButton
                 android:id="@+id/button_phone"
-                android:layout_width="64dip"
-                android:layout_height="64dip"
-                android:layout_marginRight="14dp"
+                android:layout_width="54dip"
+                android:layout_height="54dip"
+                android:layout_marginRight="16dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_phone"
                 android:background="@android:color/transparent" />
 
             <RelativeLayout
-                android:layout_width="64dip"
-                android:layout_height="64dip"
-                android:layout_marginRight="14dp">
+                android:layout_width="54dip"
+                android:layout_height="54dip"
+                android:layout_marginRight="16dp">
                 <ImageButton
                     android:id="@+id/button_dot"
                     android:layout_width="match_parent"
@@ -59,15 +59,15 @@
                     android:layout_centerInParent="true"
                     android:text="23"
                     android:textColor="#fff"
-                    android:textSize="28sp"
+                    android:textSize="24sp"
                     android:paddingBottom="2dp"
                     />
             </RelativeLayout>
 
             <ImageButton
                 android:id="@+id/button_sms"
-                android:layout_width="64dip"
-                android:layout_height="64dip"
+                android:layout_width="54dip"
+                android:layout_height="54dip"
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_sms"
                 android:background="@android:color/transparent" />
@@ -78,9 +78,9 @@
 
     <RelativeLayout
         android:id="@+id/right_drawer"
-        android:layout_width="250dip"
+        android:layout_width="150dip"
         android:layout_height="match_parent"
-        android:layout_marginTop="210dip"
+        android:layout_marginTop="320dip"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:background="#8000"
@@ -88,7 +88,7 @@
 
         <GridView
             android:id="@+id/list_apps"
-            android:layout_width="250dp"
+            android:layout_width="150dip"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_above="@+id/buttons_drawer"
@@ -99,7 +99,7 @@
             android:fadeScrollbars="false"
             android:cacheColorHint="#000"
             android:choiceMode="singleChoice"
-            android:columnWidth="50dp"
+            android:columnWidth="34dp"
             android:numColumns="auto_fit"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
@@ -114,33 +114,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <ToggleButton
-                android:id="@+id/toggle_wifi"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:textColor="@color/font_default"
-                android:textOn="@string/button_wifi_on"
-                android:textOff="@string/button_wifi_off"
-                android:background="@drawable/btn_settings"
-                android:layout_margin="0dp"/>
-            <!--<Button
-                android:id="@+id/button_settings"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:textColor="@color/font_default"
-                android:text="@string/button_settings"
-                android:background="@drawable/btn_settings"
-                android:layout_margin="0dp"/>-->
+            android:orientation="horizontal">
             <Button
                 android:id="@+id/button_filter"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:textColor="@color/font_default"

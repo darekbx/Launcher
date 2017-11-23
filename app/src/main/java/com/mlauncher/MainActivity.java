@@ -296,14 +296,14 @@ public class MainActivity
             }
         });
 
-        final ToggleButton wifiButton = (ToggleButton) findViewById(R.id.toggle_wifi);
+        /*final ToggleButton wifiButton = (ToggleButton) findViewById(R.id.toggle_wifi);
         wifiButton.setChecked(NetworkUtils.isWiFiEnabled(this));
         wifiButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 NetworkUtils.setWiFiState(getApplicationContext(), b);
             }
-        });
+        });*/
     }
 
     public void openApp(String packageName) {

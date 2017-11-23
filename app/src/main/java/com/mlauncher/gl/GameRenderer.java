@@ -112,7 +112,7 @@ public class GameRenderer implements Renderer {
         gl.glLoadIdentity();
 
         // for wallpaper
-        gl.glTranslatef(-42f, -45.0f, -350.0f);
+        gl.glTranslatef(-62f, -78.0f, -480.0f);
 
         // for dots
         //gl.glTranslatef(-55f, -45.0f, -270.0f);

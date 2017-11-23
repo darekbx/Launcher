@@ -102,7 +102,7 @@ public class DayTimeView extends View {
         if (!isMobileDataOn) {
             return;
         }
-        canvas.drawText("WARNING! Mobile data is turned ON", 10, 170, warningPaint);
+        canvas.drawText("WARNING! Mobile data is turned ON", 10, 140, warningPaint);
     }
 
     private void drawLegend(Canvas canvas, DayItem item) {
@@ -111,7 +111,7 @@ public class DayTimeView extends View {
         canvas.drawText("Screen on: " + (screenOn == null ? "00:00:00" : screenOn), left, 40, commonPaint);
         canvas.drawText(item.getSunrise(), left, 70, commonPaint);
         canvas.drawText(item.getSunset(), left, 100, commonPaint);
-        canvas.drawText("Seattle: " + getSeattleTime(), left, 130, commonPaint);
+        //canvas.drawText("Seattle: " + getSeattleTime(), left, 130, commonPaint);
 
         if (accountBalance != null) {
             String message = "Balance: " + accountBalance.amount + " (to " + accountBalance.toDate + ")";
@@ -122,7 +122,7 @@ public class DayTimeView extends View {
             canvas.drawText(message, left, 190, commonPaint);
         }
 
-        canvas.drawText("FPS: " + wallpaperFPS, left, 1130, commonPaint);
+        canvas.drawText("FPS: " + wallpaperFPS, left, 1690, commonPaint);
 
         commonPaint.setColor(Color.WHITE);
     }
