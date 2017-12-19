@@ -9,6 +9,14 @@ android {
         minSdkVersion 21
         targetSdkVersion 21
     }
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+            storeFile file(rootProject.getProjectDir().absolutePath + '/mobica_pc.keystore')
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

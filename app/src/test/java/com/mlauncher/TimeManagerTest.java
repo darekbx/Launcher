@@ -8,6 +8,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -18,6 +19,18 @@ import static org.junit.Assert.*;
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class TimeManagerTest {
+
+    @Test
+    public void diff() {
+        Calendar start = Calendar.getInstance();
+        start.set(2014, 10, 10);
+        Calendar end = Calendar.getInstance();
+        end.set(2017, 12, 23);
+
+
+        long days = TimeUnit.MILLISECONDS.toDays(end.getTimeInMillis() - start.getTimeInMillis());
+        assertEquals(1, days);
+    }
 
     @Test
     public void collect_time() throws Exception {

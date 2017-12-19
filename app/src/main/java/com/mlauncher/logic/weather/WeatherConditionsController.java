@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
 
 public class WeatherConditionsController {
 
-    public static final String IF_ADDRESS = "http://www.if.pw.edu.pl/~meteo/okienkow.php";
+    public static final String IF_ADDRESS = "http://www.if.pw.edu.pl/~meteo/index-mob.php";
     public static final int INTERVAL = 6;
 
     public interface Listener {
